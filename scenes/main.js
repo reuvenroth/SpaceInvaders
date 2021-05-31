@@ -50,7 +50,7 @@ const score = add([
   }
 ])
 
-const TIME_LEFT = 15
+let TIME_LEFT = 15
 
 const timer = add([
   text('0'),
@@ -70,6 +70,10 @@ timer.action(() => {
   }
 })
 
+function spawnInvaders() {
+  
+}
+
 function spawnBullet(p) {
   add([rect(6,18),
   pos(p),
@@ -79,7 +83,7 @@ function spawnBullet(p) {
   ])
 }
 
-keyPress('space', () => {
+keyDown('space', () => {
   spawnBullet(player.pos.add(0,-20))
 })
 
@@ -95,6 +99,7 @@ collides('bullet', 'space-invader', (b,s) => {
   camShake(4)
   destroy(b)
   destroy(s)
+  timer.time++
   score.value++
   score.text = score.value
 })
